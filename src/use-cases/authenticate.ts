@@ -1,7 +1,5 @@
-import { compare, hash } from 'bcryptjs';
-import { prisma } from 'src/lib/prisma';
+import { compare } from 'bcryptjs';
 import { UsersRepository } from 'src/repositories/users-repository';
-import { UserAlreadyExistsError } from './errors/user-already-exists-error';
 import { User } from '@prisma/client';
 import { InvalidCredentialsError } from './errors/invalid-credentials';
 
