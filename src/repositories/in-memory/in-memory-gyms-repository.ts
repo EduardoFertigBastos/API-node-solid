@@ -1,12 +1,13 @@
 /* eslint-disable camelcase */
 import { Prisma, Gym } from '@prisma/client';
-import { GymsRepository } from '../gyms-repository';
+import { FindManyNearbyParams, GymsRepository } from '../gyms-repository';
 import { randomUUID } from 'crypto';
+import { getDistanceBetweenCoordinates } from 'src/utils/get-distance-between-cordinates';
 
 export class InMemoryGymsRepository implements GymsRepository {
   public gyms: Gym[] = [];
 
-  create({
+  async create({
     id,
     latitude,
     longitude,
@@ -27,6 +28,30 @@ export class InMemoryGymsRepository implements GymsRepository {
     this.gyms.push(gym);
 
     return Promise.resolve(gym);
+  }
+
+  async searchMany(query: string, page: number): Promise<Gym[]> {
+    const gyms = this.gyms
+      .filter((gym) => gym.title.includes(query))
+      .slice((page - 1) * 20, page * 20);
+
+    return gyms;
+  }
+
+  async findManyNearby({ latitude, longitude }: FindManyNearbyParams) {
+    const gyms = this.gyms.filter((gym) => {
+      const distance = getDistanceBetweenCoordinates(
+        { latitude, longitude },
+        {
+          latitude: gym.latitude.toNumber(),
+          longitude: gym.longitude.toNumber(),
+        },
+      );
+
+      return distance < 10;
+    });
+
+    return gyms;
   }
 
   async findById(id: string) {

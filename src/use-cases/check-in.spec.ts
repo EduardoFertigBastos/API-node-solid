@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { InMemoryCheckInsRepository } from 'src/repositories/in-memory/in-memory-check-ins-repository';
 import CheckInUseCase from './check-in';
 import { InMemoryGymsRepository } from 'src/repositories/in-memory/in-memory-gyms-repository';
-import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins';
+import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error';
 import { MaxDistanceError } from './errors/max-distance-error';
 
 let checkInsRepository: InMemoryCheckInsRepository;
