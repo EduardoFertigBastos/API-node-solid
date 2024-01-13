@@ -48,7 +48,8 @@ export default class CheckInUseCase {
 
     const MAX_DISTANCE_IN_KILOMETERS = 0.1;
 
-    if (distance <= MAX_DISTANCE_IN_KILOMETERS) {
+    console.log('distance', distance);
+    if (distance > MAX_DISTANCE_IN_KILOMETERS) {
       throw new MaxDistanceError();
     }
 

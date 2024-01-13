@@ -21,7 +21,6 @@ describe('Fetch users check ins Use Case', () => {
 
     const { checkIns } = await sut.execute({ userId: 'user_id-1' });
 
-    console.log(checkIns);
     expect(checkIns).toHaveLength(20);
   });
 
