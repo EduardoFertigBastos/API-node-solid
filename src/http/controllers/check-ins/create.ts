@@ -17,13 +17,6 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const checkInUseCase = makeCheckInUseCase();
 
-  console.log('dados');
-  console.log({
-    gymId,
-    userId: request.user.sub,
-    userLatitude: latitude,
-    userLongitude: longitude,
-  });
   const { checkIn } = await checkInUseCase.execute({
     gymId,
     userId: request.user.sub,
